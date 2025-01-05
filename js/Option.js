@@ -25,17 +25,18 @@ var PlaneOption = function () {
      * 设置难度
      */
     this.setDifficulty = function () {
+        var self = this; // Store reference to PlaneOption instance
         $j('#nandu li').each(function () {
             if ($j(this).hasClass('bth')) {
                 switch ($j(this).text()) {
                     case '简单':
-                        this.difficulty = 'easy';
+                        self.difficulty = 'easy';
                         break;
                     case '普通':
-                        this.difficulty = 'normal';
+                        self.difficulty = 'normal';
                         break;
                     case '难':
-                        this.difficulty = 'hard';
+                        self.difficulty = 'hard';
                         break;
                 }
             }

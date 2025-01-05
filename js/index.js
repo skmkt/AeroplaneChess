@@ -399,6 +399,17 @@ $j(function () {
     };
     //控制F5刷新键
     window.onkeydown = function (e) {
+        // Handle space key for dice
+        if (e.which === 32 || e.keyCode === 32) { // 32 is the keyCode for space
+            e.preventDefault(); // Prevent page scrolling
+            var diceElement = $j("#dice");
+            if (diceElement.hasClass('pointer')) {
+                diceElement.click();
+            }
+            return false;
+        }
+
+        // Existing F5 refresh control
         if (e.which) {
             if (e.which == 116) {
                 if (confirm('确定刷新页面吗？刷新后页面数据将被清除！')) {
@@ -430,4 +441,5 @@ $j(function () {
     planeOption.tabStyle('#yellowUser li');
     planeOption.tabStyle('#greenUser li');
     planeOption.tabStyle('#qifei li');
+    planeOption.tabStyle('#nandu li');
 });
