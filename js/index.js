@@ -101,8 +101,8 @@ function addPlaneEvent(state) {
     $j('.plane').each(function () {
         var currentUserPlane = ($j(this).attr('type') == planeOption.currentUser ? $j(this) : undefined);
         if (currentUserPlane) {
-            if (diceNum == 6) {
-                planeAudio.playRolledSixMusic();
+            // Check if the dice number allows take-off
+            if (planeOption.canTakeOff(diceNum)) {
                 if ($j(this).attr('state') != 'win') {
                     currentUserPlane.click(function () {
                         movePlane(this);
@@ -120,7 +120,7 @@ function addPlaneEvent(state) {
         }
     });
     if (!flag) {
-        setTimeout(nextUser(), 1000);
+        setTimeout(nextUser, 1000);
     } else if (state == 'computer') {  //电脑执行
         computer.performing();
     }

@@ -21,6 +21,7 @@ var PlaneOption = function () {
     this.currentUser = 'red';  //当前用户
     this.backgroundMusic = true;    //背景音乐开关
     this.gameMusic = true;  //游戏音效开关
+    this.takeOffNumbers = [6]; // Default take-off number is 6
     /**
      * 设置难度
      */
@@ -81,11 +82,43 @@ var PlaneOption = function () {
     };
 
     /**
+     * Set take-off numbers based on qifei selection
+     */
+    this.setTakeOffNumbers = function() {
+        var self = this;
+        $j('#qifei li').each(function() {
+            if ($j(this).hasClass('bth')) {
+                switch ($j(this).text()) {
+                    case '2,4,6':
+                        self.takeOffNumbers = [2, 4, 6];
+                        break;
+                    case '5,6':
+                        self.takeOffNumbers = [5, 6];
+                        break;
+                    case '6':
+                        self.takeOffNumbers = [6];
+                        break;
+                }
+            }
+        });
+    };
+
+    /**
+     * Check if the number allows take-off
+     * @param {number} num - The dice number
+     * @returns {boolean} Whether the number allows take-off
+     */
+    this.canTakeOff = function(num) {
+        return this.takeOffNumbers.includes(num);
+    };
+
+    /**
      * 开始
      */
     this.begin = function () {
         this.setUserList();
         this.setDifficulty();
+        this.setTakeOffNumbers();
         createPlane(planeOption.userList);
         $j("#sdn" + planeOption.currentUser).text('请投骰');
         $j('.option').hide();

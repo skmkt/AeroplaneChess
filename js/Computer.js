@@ -84,7 +84,7 @@ var Computer = function () {
 
         // Base case for planes that haven't started
         if (!currentPos) {
-            if (diceNum === 6) {
+            if (planeOption.canTakeOff(diceNum)) {
                 return strategy === 'aggressive' ? 100 : 50; // Both strategies value getting planes out
             }
             return 0;
